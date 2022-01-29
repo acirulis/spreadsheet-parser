@@ -1,6 +1,23 @@
 Akeneo Spreadsheet Parser
 =========================
 
+This repository is forked from https://github.com/akeneo-labs/spreadsheet-parser in order to add Symfony 5 and 6 support.
+In order to use it, please add following to your composer.json file:
+```composer 
+    "repositories": [{
+        "type": "vcs",
+        "url": "https://github.com/acirulis/spreadsheet-parser"
+    }]
+    
+    ...
+   
+    "require": {
+        "akeneo-labs/spreadsheet-parser": "1.4.*"
+    }
+```
+
+---
+
 This component is designed to extract data from spreadsheets, while being easy on resources, even for large files.
 
 The current version of the spreadsheet parser works with csv and xlsx files.
