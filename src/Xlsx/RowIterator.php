@@ -18,27 +18,27 @@ class RowIterator implements \Iterator
     /**
      * @var RowBuilderFactory
      */
-    protected $rowBuilderFactory;
+    protected RowBuilderFactory $rowBuilderFactory;
 
     /**
      * @var ColumnIndexTransformer
      */
-    protected $columnIndexTransformer;
+    protected ColumnIndexTransformer $columnIndexTransformer;
 
     /**
      * @var ValueTransformer
      */
-    protected $valueTransformer;
+    protected ValueTransformer $valueTransformer;
 
     /**
      * @var string
      */
-    protected $path;
+    protected string $path;
 
     /**
      * @var array
      */
-    protected $options;
+    protected array $options;
 
     /**
      * @var \XMLReader
@@ -48,27 +48,18 @@ class RowIterator implements \Iterator
     /**
      * @var int
      */
-    protected $currentKey;
+    protected int $currentKey;
 
     /**
      * @var array
      */
-    protected $currentValue;
+    protected array $currentValue;
 
     /**
      * @var boolean
      */
-    protected $valid;
+    protected bool $valid;
 
-    /**
-     * The Archive from which the path was extracted.
-     *
-     * A reference to the object is kept here to ensure that it is not deleted
-     * before the RowIterator, as this would remove the extraction folder.
-     *
-     * @var Archive
-     */
-    private $archive;
 
     /**
      * Constructor
@@ -99,7 +90,7 @@ class RowIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->currentValue;
     }
@@ -107,7 +98,7 @@ class RowIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->currentKey;
     }
@@ -115,7 +106,7 @@ class RowIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
         $this->valid = false;
 
@@ -169,20 +160,19 @@ class RowIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
         if ($this->xml) {
             $this->xml->close();
         }
-        $this->xml = new \XMLReader();
-        $this->xml->open($this->path);
+        $this->xml = \XMLReader::open($this->path);
         $this->next();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->valid;
     }
@@ -194,8 +184,8 @@ class RowIterator implements \Iterator
      *
      * @return string
      */
-    protected function getValue($value)
+    protected function getValue($value): string
     {
-        return null === $value ? '' : $value;
+        return $value ?? '';
     }
 }

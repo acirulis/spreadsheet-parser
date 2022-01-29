@@ -69,7 +69,7 @@ class RowIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->currentValue;
     }
@@ -77,7 +77,7 @@ class RowIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->currentKey;
     }
@@ -85,7 +85,7 @@ class RowIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
         $this->currentValue = fgetcsv(
             $this->fileHandle,
@@ -101,7 +101,7 @@ class RowIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
         if ($this->fileHandle) {
             rewind($this->fileHandle);
@@ -115,7 +115,7 @@ class RowIterator implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->valid;
     }
@@ -143,7 +143,7 @@ class RowIterator implements \Iterator
      */
     protected function openResource()
     {
-        $this->fileHandle = fopen($this->path, 'r');
+        $this->fileHandle = fopen($this->path, 'rb');
         $currentEncoding = $this->getCurrentEncoding();
 
         if (isset($this->options['encoding']) && $currentEncoding !== $this->options['encoding']) {
