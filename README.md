@@ -3,6 +3,7 @@ Akeneo Spreadsheet Parser
 
 This repository is forked from https://github.com/akeneo-labs/spreadsheet-parser in order to add Symfony 5 and 6 support.
 In order to use it, please add following to your composer.json file:
+Use version 1.4.* for php < 8.0.0 and version 2.0.* for php >= 8.0.0
 ```composer 
     "repositories": [{
         "type": "vcs",
